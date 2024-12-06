@@ -32,6 +32,8 @@ document
         this.reset();
       } else {
         this.reset();
+        let error = await response.json();
+        console.log(error);
         const errorData = await response.json();
         alert(`Failed to submit: ${errorData.message}`);
       }
