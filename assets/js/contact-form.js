@@ -5,19 +5,27 @@ document
 
     const formData = new FormData(this);
 
-    const formObject = {};
+    let formObject = {};
     formData.forEach((value, key) => {
       formObject[key] = value;
     });
+    formObject = {
+      body: { ...formObject },
+      to: "",
+      subject: "You have a new message from AI CUSTOMER CARE",
+    };
 
     try {
-      const response = await fetch("https://yourbackendurl1234.com/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formObject),
-      });
+      const response = await fetch(
+        "https://smtp-api-tawny.vercel.app/send-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formObject),
+        }
+      );
 
       if (response.ok) {
         alert("Your form has been submitted successfully!");
